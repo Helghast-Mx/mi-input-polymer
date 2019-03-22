@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>mi-input demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../mi-input.html">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+        
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic mi-input demo</h3>
+    
+
+        <body>
+
+          <div>
+
+            <label class="label" for="text">Nombre</label>
+            <mi-input type-Input="text" input-Name="nombre" input-Id="nombre"></mi-input>
+
+            <label class="label" for="text">email</label>
+            <mi-input type-Input="email" input-Name="email" input-Id="email" ></mi-input>
+
+            <label class="label" for="text">Telefono</label>
+            <mi-input type-Input="number" input-Name="telefono" input-Id="Telefono"></mi-input>
+
+            <label class="label" for="text">email Laboral</label>
+            <mi-input type-Input="email" input-Name="emailLabo" input-Id="emailLabo"></mi-input>
+
+          </div>
+
+          <div>
+
+            <label id="nombre">Nombre</label>
+            <label id="email">email</label>
+            <label id="telefono">Telefono</label>
+            <label id="nombre">Nombre</label>
+            
+
+
+          </div>
+
+
+        </body>
+<script>
+
+const obj = {};
+
+document.addEventListener('input-action', (event) => {
+  console.log(event);
+
+  const objP = document.querySelector('#nombre') 
+  
+  obj[event.detail.name] = event.detail.value
+
+  objP.innerHTML = obj[event.detail.name]
+ 
+  console.log(obj);
+
+} )
+
+
+
+              // document.addEventListener('input-event', (event)=>{
+              // obj[event.detail.name] = event.detail.value;
+              // document.querySelector('#nombre').textContent = JSON.stringify(obj);
+                
+            // });
+
+
+
+
+
+
+
+</script>
+      
+  </div>
+</body>
+
+</html>

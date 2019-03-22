@@ -1,0 +1,92 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="mi-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      input {
+        border-radius: 4%;
+        padding: 10px 5px 15px 50px;
+        font-family: sans-serif;
+        font-size: 15px;
+        font-style: normal;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    </style>
+
+    <input type="{{typeInput}}" name="{{inputName}}" id="{{inputId}}">
+    <!-- <label name="{{}}" for="">"{{labelName}}"</label> -->
+    <slot></slot>
+  </template>
+
+  <script>
+    /**
+     * `mi-input`
+     * Input donde metemos de varios tipos
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+
+
+
+    class MiInput extends Polymer.Element {
+      static get is() {
+        return 'mi-input';
+      }
+      static get properties() {
+        return {
+          typeInput: {
+            type: String,
+            value: "text"
+          },
+          inputName: {
+            type: String,
+            value: "text"
+          },
+
+          inputId: {
+            type:String,
+            value:"text"
+          },
+          labelName:{
+            type:String,
+            value:"text"
+          },
+        };
+      }
+
+      constructor() {
+        super();
+        // this.addEventListener('change', this.toggle.bind(this))
+      }
+
+      ready() {
+        // cuando ya este renderizado los input, se tiene que hacer en el ready 
+        super.ready()
+        // el shadowRoot  selecciona todos tus elementos que quedan en el shadow
+        // despues con el querySelector seleccionamos todos los input y le
+        // agregamos un evento, el .addEvent (tipo de evento y el cackback)
+        this.shadowRoot.querySelector('input').addEventListener('keyup', this.toggle.bind(this))
+      }
+
+      toggle(e) {
+        
+        let target = e.path[0]
+
+        let action = this.dispatchEvent(new CustomEvent('input-action', 
+         {detail: {name:target.name, value:target.value}, bubbles:true, composed:true}));
+        // console.log(e);
+
+
+      }
+    }
+
+    window.customElements.define(MiInput.is, MiInput);
+  </script>
+</dom-module>
